@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 export default function DebugPage() {
   const [envVars, setEnvVars] = useState<Record<string, string>>({});
-  const [buildInfo, setBuildInfo] = useState<any>({});
+  const [buildInfo, setBuildInfo] = useState<Record<string, string | boolean | undefined>>({});
   const [timestamp, setTimestamp] = useState('');
 
   useEffect(() => {
@@ -101,18 +102,18 @@ export default function DebugPage() {
 
           {/* Links */}
           <div className="mt-6 flex gap-4">
-            <a 
+            <Link 
               href="/"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Go Home
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/test-deployment"
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               Test Deployment
-            </a>
+            </Link>
           </div>
         </div>
       </div>
