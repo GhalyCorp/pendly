@@ -109,7 +109,7 @@ export default function IndividualCampaignPost({ business, showActions = true }:
       progress: progress,
       isDifferent: liveBusiness.donated !== business.donated
     });
-  }, [liveBusiness, business, progress]);
+  }, [liveBusiness, business, progress, liveBusiness.donated, liveBusiness.goal]);
 
   useEffect(() => {
     console.log('Setting up real-time listener for business:', business.id);
