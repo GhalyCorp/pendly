@@ -26,11 +26,11 @@ if (getApps().length === 0) {
         auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL || 'https://www.googleapis.com/oauth2/v1/certs',
         client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
       };
-      
-      initializeApp({
+    
+    initializeApp({
         credential: cert(serviceAccount as ServiceAccount),
-      });
-      console.log('Firebase Admin initialized successfully');
+    });
+    console.log('Firebase Admin initialized successfully');
     } else {
       console.log('Firebase Admin environment variables not found, skipping initialization');
     }
@@ -41,10 +41,10 @@ if (getApps().length === 0) {
 }
 
 // Only get Firestore if Firebase Admin is initialized
-let db: any = null;
+let db: FirebaseFirestore.Firestore | null = null;
 try {
   db = getFirestore();
-} catch (error) {
+} catch {
   console.log('Firebase Admin not initialized, skipping Firestore operations');
 }
 
@@ -65,6 +65,11 @@ export async function POST(request: Request) {
     console.log('Checking Stripe status for user:', userId);
 
     // Get user's Stripe account info from Firestore
+    if (!db) {
+      console.error('Firestore not initialized');
+      return NextResponse.json({ error: 'Database not available' }, { status: 500 });
+    }
+    
     const userRef = db.collection('users').doc(userId);
     const userSnap = await userRef.get();
     

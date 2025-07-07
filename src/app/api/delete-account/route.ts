@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getFirestore } from 'firebase-admin/firestore';
 import { initializeApp, getApps, cert, ServiceAccount } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
+import { getAuth, Auth } from 'firebase-admin/auth';
 
 // Initialize Firebase Admin with environment variables
 if (getApps().length === 0) {
@@ -22,11 +22,11 @@ if (getApps().length === 0) {
         auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL || 'https://www.googleapis.com/oauth2/v1/certs',
         client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
       };
-      
-      initializeApp({
+    
+    initializeApp({
         credential: cert(serviceAccount as ServiceAccount),
-      });
-      console.log('Firebase Admin initialized successfully');
+    });
+    console.log('Firebase Admin initialized successfully');
     } else {
       console.log('Firebase Admin environment variables not found, skipping initialization');
     }
@@ -37,12 +37,12 @@ if (getApps().length === 0) {
 }
 
 // Only get Firestore if Firebase Admin is initialized
-let db: any = null;
-let auth: any = null;
+let db: FirebaseFirestore.Firestore | null = null;
+let auth: Auth | null = null;
 try {
   db = getFirestore();
   auth = getAuth();
-} catch (error) {
+} catch {
   console.log('Firebase Admin not initialized, skipping Firestore operations');
 }
 
@@ -61,6 +61,11 @@ export async function POST(request: Request) {
     console.log('Deleting account for user:', userId, userEmail);
 
     // 1. Delete all business posts associated with this user's email
+    if (!db) {
+      console.error('Firestore not initialized');
+      return NextResponse.json({ error: 'Database not available' }, { status: 500 });
+    }
+    
     const businessesQuery = db.collection('businesses').where('email', '==', userEmail);
     const businessesSnapshot = await businessesQuery.get();
     
@@ -83,8 +88,12 @@ export async function POST(request: Request) {
 
     // 3. Delete the Firebase Auth user account
     try {
+      if (!auth) {
+        console.log('Firebase Auth not initialized, skipping user deletion');
+      } else {
       await auth.deleteUser(userId);
       console.log('Deleted Firebase Auth user account');
+      }
     } catch (authError) {
       console.error('Error deleting Firebase Auth user:', authError);
       // Continue even if auth deletion fails - the data is already cleaned up

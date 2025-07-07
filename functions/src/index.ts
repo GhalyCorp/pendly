@@ -42,7 +42,7 @@ export const sendRewardEmail = onDocumentCreated(
     const donation = snap.data();
     const { email, amount, name } = donation;
     const businessId = event.params.businessId;
-    
+
     if (!amount || !businessId || !email) {
       console.log("Missing required fields");
       return;
@@ -50,7 +50,7 @@ export const sendRewardEmail = onDocumentCreated(
 
     try {
       // Set up SendGrid
-      const apiKey = sendgridApiKey.value();
+        const apiKey = sendgridApiKey.value();
       console.log("API Key length:", apiKey ? apiKey.length : 0);
       console.log("API Key starts with SG.:", apiKey ? apiKey.startsWith('SG.') : false);
       console.log("API Key first 10 chars:", apiKey ? apiKey.substring(0, 10) : 'none');
@@ -59,7 +59,7 @@ export const sendRewardEmail = onDocumentCreated(
         console.log("SendGrid not configured - API key invalid");
         return;
       }
-      
+
       // Clean the API key to remove any whitespace or hidden characters
       const cleanApiKey = apiKey.trim();
       console.log("Clean API Key length:", cleanApiKey.length);
@@ -74,7 +74,7 @@ export const sendRewardEmail = onDocumentCreated(
         console.log("Business not found");
         return;
       }
-      
+
       const business = businessSnap.data();
       const businessName = business?.businessName || business?.name || "a business";
       const businessEmail = business?.email;
@@ -173,7 +173,7 @@ export const sendRewardEmail = onDocumentCreated(
                 <div class="qr-text">Show this QR code to redeem your reward:</div>
                 <div class="qr-code">
                   <img src="${qrCodeDataUrl}" alt="QR Code" width="200" height="200" />
-                </div>
+                  </div>
                 <div class="qr-note">This QR code is unique to your reward and cannot be reused.</div>
                 <div style="margin-top: 15px;">
                   <a href="${redeemUrl}" style="color: #2563eb; text-decoration: none; font-weight: 600;">Click here to redeem online</a>
@@ -208,7 +208,7 @@ export const sendRewardEmail = onDocumentCreated(
                 This email was sent from Pendly - Supporting local businesses and communities.<br>
                 Need help? Contact us at <a href="mailto:adamghaly@pendly.org" style="color:#2563eb;">adamghaly@pendly.org</a><br>
                 <strong>Reward ID:</strong> ${rewardId}
-              </div>
+            </div>
             </div>
             <div class="footer"></div>
           </div>
@@ -299,7 +299,7 @@ export const sendRewardEmail = onDocumentCreated(
         `;
 
         await sgMail.send({
-          to: businessEmail,
+        to: businessEmail,
           from: "rewards@pendly.org",
           subject: `New Donation Received - $${(amount / 100).toFixed(2)}`,
           html: businessEmailContent,

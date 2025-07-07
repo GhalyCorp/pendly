@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import Link from 'next/link';
@@ -82,7 +82,7 @@ export default function IndividualCampaignPost({ business, showActions = true }:
   
   const donated = liveBusiness.donated || 0;
   const goal = liveBusiness.goal || 1;
-  const progress = Math.min((donated / goal) * 100, 100);
+  const progress = useMemo(() => Math.min((donated / goal) * 100, 100), [donated, goal]);
   useEffect(() => {
     console.log('IndividualCampaignPost - Business data:', {
       id: business.id,
@@ -106,10 +106,10 @@ export default function IndividualCampaignPost({ business, showActions = true }:
       businessName: liveBusiness.businessName,
       donated: liveBusiness.donated,
       goal: liveBusiness.goal,
-      progress: (liveBusiness.donated / liveBusiness.goal) * 100,
+      progress: progress,
       isDifferent: liveBusiness.donated !== business.donated
     });
-  }, [liveBusiness, business]);
+  }, [liveBusiness, business, progress]);
 
   useEffect(() => {
     console.log('Setting up real-time listener for business:', business.id);
@@ -232,7 +232,7 @@ export default function IndividualCampaignPost({ business, showActions = true }:
       } catch (error) {
         console.error('Error fetching donation data:', error);
         if (isMounted) {
-          setDonorsCount(0);
+        setDonorsCount(0);
         }
       }
     }

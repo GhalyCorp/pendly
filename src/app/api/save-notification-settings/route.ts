@@ -23,7 +23,7 @@ if (getApps().length === 0) {
         client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
       };
       
-      initializeApp({
+  initializeApp({
         credential: cert(serviceAccount as ServiceAccount),
       });
       console.log('Firebase Admin initialized successfully');
@@ -37,10 +37,10 @@ if (getApps().length === 0) {
 }
 
 // Only get Firestore if Firebase Admin is initialized
-let db: any = null;
+let db: FirebaseFirestore.Firestore | null = null;
 try {
   db = getFirestore();
-} catch (error) {
+} catch {
   console.log('Firebase Admin not initialized, skipping Firestore operations');
 }
 
@@ -61,6 +61,11 @@ export async function POST(request: NextRequest) {
     const userId = decodedToken.uid;
 
     // Save notification settings to Firestore
+    if (!db) {
+      console.error('Firestore not initialized');
+      return NextResponse.json({ error: 'Database not available' }, { status: 500 });
+    }
+    
     await db.collection('users').doc(userId).set({
       notificationSettings,
       updatedAt: new Date(),
@@ -91,6 +96,11 @@ export async function GET(request: NextRequest) {
     const userId = decodedToken.uid;
 
     // Get notification settings from Firestore
+    if (!db) {
+      console.error('Firestore not initialized');
+      return NextResponse.json({ error: 'Database not available' }, { status: 500 });
+    }
+    
     const userDoc = await db.collection('users').doc(userId).get();
     
     if (!userDoc.exists) {

@@ -31,9 +31,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="absolute top-[-60px] left-[-80px] w-[180px] h-[180px] rounded-full bg-red-500 opacity-40 z-0 pointer-events-none select-none float-animate-2"></div>
         <div className="absolute bottom-[-80px] right-[-80px] w-[220px] h-[220px] rounded-full bg-red-500 opacity-40 z-0 pointer-events-none select-none float-animate-3"></div>
         <ErrorBoundary>
-          <NavBar />
-          <div className="pt-14">{children}</div>
-          <SupportButton />
+        <NavBar />
+        <div className="pt-14">{children}</div>
+        <SupportButton />
         </ErrorBoundary>
       </body>
     </html>

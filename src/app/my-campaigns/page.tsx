@@ -185,7 +185,7 @@ export default function MyCampaignsPage() {
                     href={`/business/${campaign.id}`}
                     className="absolute inset-0 z-10"
                     aria-label={`View ${campaign.campaignTitle} campaign`}
-                  />
+              />
                 </div>
               ))}
             </div>

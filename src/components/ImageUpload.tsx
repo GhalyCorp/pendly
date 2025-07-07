@@ -72,20 +72,20 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
     const files = Array.from(e.dataTransfer.files);
     
     if (files.length > 0) {
-              const newImages: string[] = [];
+      const newImages: string[] = [];
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
         
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          
-          if (!file.type.startsWith('image/')) {
-            alert('Please upload only image files.');
-            continue;
-          }
+        if (!file.type.startsWith('image/')) {
+          alert('Please upload only image files.');
+          continue;
+        }
 
-          if (file.size > 5 * 1024 * 1024) {
-            alert('Image size must be less than 5MB.');
-            continue;
-          }
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Image size must be less than 5MB.');
+          continue;
+        }
         const reader = new FileReader();
         reader.onload = (e) => {
           const imageUrl = e.target?.result as string;
