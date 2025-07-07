@@ -40,7 +40,13 @@ if (getApps().length === 0) {
   }
 }
 
-const db = getFirestore();
+// Only get Firestore if Firebase Admin is initialized
+let db: any = null;
+try {
+  db = getFirestore();
+} catch (error) {
+  console.log('Firebase Admin not initialized, skipping Firestore operations');
+}
 
 export async function POST(request: Request) {
   try {
@@ -71,6 +77,33 @@ export async function POST(request: Request) {
     console.log('Creating payment intent for business:', businessId);
 
     // Fetch business from Firestore to get Stripe account ID and platform fee
+    if (!db) {
+      console.log('Firebase Admin not available, using default values');
+      // Return a basic payment intent without business data
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd',
+        automatic_payment_methods: { enabled: true },
+        receipt_email: email,
+        metadata: { 
+          email, 
+          businessName, 
+          businessId,
+          platformFee: '0',
+          businessAmount: amount.toString(),
+          platformFeePercentage: '0',
+        },
+      });
+      
+      return NextResponse.json({ 
+        clientSecret: paymentIntent.client_secret,
+        platformFee: 0,
+        businessAmount: amount,
+        platformFeePercentage: 0,
+        transferType: 'manual'
+      });
+    }
+    
     const businessRef = db.collection('businesses').doc(businessId);
     const businessSnap = await businessRef.get();
     

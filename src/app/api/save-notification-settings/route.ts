@@ -36,7 +36,13 @@ if (getApps().length === 0) {
   }
 }
 
-const db = getFirestore();
+// Only get Firestore if Firebase Admin is initialized
+let db: any = null;
+try {
+  db = getFirestore();
+} catch (error) {
+  console.log('Firebase Admin not initialized, skipping Firestore operations');
+}
 
 export async function POST(request: NextRequest) {
   try {
