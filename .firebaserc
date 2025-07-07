@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "pendly-b9e13",
+    "pendly": "pendly-d79b2",
+    "firebase functions:list": "pendly-d79b2"
+  },
+  "targets": {},
+  "etags": {}
+}

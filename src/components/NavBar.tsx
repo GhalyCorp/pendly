@@ -1,0 +1,111 @@
+'use client';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { app } from '../lib/firebase';
+import { usePathname } from 'next/navigation';
+import SearchBarNav from './SearchBarNav';
+
+// Accept search and setSearch as props for homepage
+interface NavBarProps {
+  search?: string;
+  setSearch?: (v: string) => void;
+}
+
+import type { User } from 'firebase/auth';
+
+export default function NavBar({ search, setSearch }: NavBarProps) {
+  const [user, setUser] = useState<User | null>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, async (u) => {
+      setUser(u);
+      // No longer tracking profileId for ESLint cleanliness
+    });
+    return () => unsubscribe();
+  }, []);
+
+
+
+  const handleLogout = async () => {
+    await signOut(getAuth(app));
+  };
+
+
+
+
+
+  return (
+    <nav className="w-full bg-white flex items-center justify-between px-8 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
+      <div className="relative group">
+        <Link href="/" className="flex items-center gap-0 text-2xl font-bold hover:opacity-80 transition cursor-pointer">
+          <Image src="/pendly-logo.png" alt="Pendly Logo" width={32} height={32} className="h-8 w-8 object-contain" />
+          <span style={{ color: '#0181fe' }}>endly</span>
+        </Link>
+        <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+          <Link
+            href="/"
+            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+          >
+            🏠 Home
+          </Link>
+          <Link
+            href="/how-it-works"
+            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+          >
+            🔍 How It Works
+          </Link>
+          <Link
+            href="/about"
+            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+          >
+            ℹ️ About
+          </Link>
+        </div>
+      </div>
+      {pathname === '/' && search !== undefined && setSearch !== undefined && (
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <SearchBarNav value={search} onChangeAction={setSearch} />
+        </div>
+      )}
+      <div className="flex items-center gap-4">
+        {!user && (
+          <Link href="/signup" className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition">Start a Campaign</Link>
+        )}
+        {!user && (
+          <Link href="/login" className="bg-blue-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-800 transition">Log In</Link>
+        )}
+        {user && (
+          <div className="relative group">
+            <button className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold hover:bg-blue-200 transition">
+              {user.displayName || user.email}
+            </button>
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+              <Link
+                href="/my-campaigns"
+                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+              >
+                👤 Profile
+              </Link>
+              <Link
+                href="/settings"
+                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+              >
+                ⚙️ Settings
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+              >
+                🚪 Log Out
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
