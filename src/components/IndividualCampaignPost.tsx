@@ -98,7 +98,7 @@ export default function IndividualCampaignPost({ business, showActions = true }:
       firstImageUrl: business.images?.[0],
       firstImageType: typeof business.images?.[0]
     });
-  }, [business, progress, selectedImage]);
+  }, [business, progress, selectedImage, business.donated, business.goal, business.images]);
 
   useEffect(() => {
     console.log('IndividualCampaignPost - Live business data updated:', {
