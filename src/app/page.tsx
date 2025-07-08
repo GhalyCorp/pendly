@@ -125,23 +125,23 @@ export default function HomePage() {
         <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto homepage-blue-gradient relative">
         {/* Large soft red circle accents with floating animation */}
         {/* Circle 1 */}
-        <div className="absolute top-[-40px] md:top-[-80px] right-[-60px] md:right-[-120px] w-[160px] h-[160px] md:w-[320px] md:h-[320px] pointer-events-none z-0">
+        <div className="absolute top-[-20px] md:top-[-40px] right-[-20px] md:right-[-40px] w-[80px] h-[80px] md:w-[160px] md:h-[160px] pointer-events-none z-0">
           <div className="circle float-animate-1" style={{width: '100%', height: '100%', opacity: 0.6, background: 'rgba(255, 60, 60, 0.6)'}}></div>
         </div>
         {/* Circle 2 */}
-        <div className="absolute bottom-[-50px] md:bottom-[-100px] left-[-50px] md:left-[-100px] w-[130px] h-[130px] md:w-[260px] md:h-[260px] pointer-events-none z-0">
+        <div className="absolute bottom-[-20px] md:bottom-[-40px] left-[-20px] md:left-[-40px] w-[65px] h-[65px] md:w-[130px] md:h-[130px] pointer-events-none z-0">
           <div className="circle float-animate-2" style={{width: '100%', height: '100%', opacity: 0.6, background: 'rgba(255, 60, 60, 0.6)'}}></div>
         </div>
         {/* Circle 3 */}
-        <div className="absolute top-[40%] left-[-60px] md:left-[-120px] w-[90px] h-[90px] md:w-[180px] md:h-[180px] pointer-events-none z-0">
+        <div className="absolute top-[30%] left-[-20px] md:left-[-40px] w-[45px] h-[45px] md:w-[90px] md:h-[90px] pointer-events-none z-0">
           <div className="circle float-animate-3" style={{width: '100%', height: '100%', opacity: 0.4}}></div>
         </div>
         {/* Circle 4 */}
-        <div className="absolute top-[-30px] md:top-[-60px] left-[-40px] md:left-[-80px] w-[90px] h-[90px] md:w-[180px] md:h-[180px] pointer-events-none z-0">
+        <div className="absolute top-[-15px] md:top-[-30px] left-[-15px] md:left-[-30px] w-[45px] h-[45px] md:w-[90px] md:h-[90px] pointer-events-none z-0">
           <div className="circle float-animate-2" style={{width: '100%', height: '100%', opacity: 0.6}}></div>
         </div>
         {/* Circle 5 */}
-        <div className="absolute bottom-[-40px] md:bottom-[-80px] right-[-40px] md:right-[-80px] w-[110px] h-[110px] md:w-[220px] md:h-[220px] pointer-events-none z-0">
+        <div className="absolute bottom-[-15px] md:bottom-[-30px] right-[-15px] md:right-[-30px] w-[55px] h-[55px] md:w-[110px] md:h-[110px] pointer-events-none z-0">
           <div className="circle float-animate-1" style={{width: '100%', height: '100%', opacity: 0.6}}></div>
         </div>
 
