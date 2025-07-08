@@ -61,7 +61,7 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
 
 
   return (
-    <nav className="w-full bg-white flex items-center justify-between px-4 md:px-8 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
+    <nav className="w-full bg-white flex items-center justify-between px-2 md:px-4 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
       <div className="relative group">
         {/* Desktop: Hover-based dropdown */}
         <div className="hidden md:block">
