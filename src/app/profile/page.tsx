@@ -96,8 +96,8 @@ export default function ProfilePage() {
   return (
     <>
       <NavBar />
-      <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32 w-full">
-        <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto">
+      <main className="flex flex-col items-center pt-14 relative overflow-x-hidden pb-32 w-full">
+        <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto homepage-blue-gradient relative">
         <section className="flex flex-col items-center mt-10 mb-8 w-full z-10">
           <h2 className="text-5xl font-bold text-red-700 mb-5 text-center">
             {businessName ? `${businessName}'s Campaigns` : 'My Campaigns'}

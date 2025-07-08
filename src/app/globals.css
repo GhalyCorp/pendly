@@ -24,11 +24,30 @@ body {
 html {
   width: 100%;
   max-width: 100vw;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #f1f5f9;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
 }
 
 .global-gradient-bg {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  min-height: 100vh;
 }
 
 .homepage-blue-gradient {
