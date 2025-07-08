@@ -62,6 +62,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <NavBar />
         <div className="pt-14">{children}</div>
         <SupportButton />
+        {/* Footer with legal links */}
+        <footer className="w-full flex flex-col items-center justify-center py-4 mt-8 bg-white/10 backdrop-blur-sm text-white text-sm border-t border-white/20">
+          <div className="flex flex-row gap-4">
+            <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
+            <span>|</span>
+            <a href="/terms-of-service" className="hover:underline">Terms of Service</a>
+          </div>
+          <div className="mt-2 opacity-70">&copy; {new Date().getFullYear()} Pendly. All rights reserved.</div>
+        </footer>
         </ErrorBoundary>
       </body>
     </html>
