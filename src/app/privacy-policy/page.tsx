@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="text-3xl font-bold text-blue-900 mb-4">Privacy Policy</h1>
         <p className="text-blue-900 mb-6 text-center">
           Effective Date: {new Date().getFullYear()}<br/>
-          This Privacy Policy explains how Pendly ("we", "us", or "our") collects, uses, stores, and shares your information when you use our website and services.
+          This Privacy Policy explains how Pendly (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses, stores, and shares your information when you use our website and services.
         </p>
         <div className="text-blue-900 space-y-4 text-sm">
           <h2 className="font-bold text-lg">1. Information We Collect</h2>
