@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { app } from '../lib/firebase';
 import { usePathname } from 'next/navigation';
@@ -18,7 +18,11 @@ import type { User } from 'firebase/auth';
 export default function NavBar({ search, setSearch }: NavBarProps) {
   const [user, setUser] = useState<User | null>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [showLogoDropdown, setShowLogoDropdown] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const pathname = usePathname();
+  const logoDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const auth = getAuth(app);
@@ -27,6 +31,23 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
       // No longer tracking profileId for ESLint cleanliness
     });
     return () => unsubscribe();
+  }, []);
+
+  // Click outside handler for mobile dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (logoDropdownRef.current && !logoDropdownRef.current.contains(event.target as Node)) {
+        setShowLogoDropdown(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node)) {
+        setShowUserDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
 
@@ -42,29 +63,68 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
   return (
     <nav className="w-full bg-white flex items-center justify-between px-4 md:px-8 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
       <div className="relative group">
-        <Link href="/" className="flex items-center gap-0 text-2xl font-bold hover:opacity-80 transition cursor-pointer">
-          <Image src="/pendly-logo.png" alt="Pendly Logo" width={32} height={32} className="h-8 w-8 object-contain" />
-          <span style={{ color: '#0181fe' }}>endly</span>
-        </Link>
-        <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
-          <Link
-            href="/"
-            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
-          >
-            🏠 Home
+        {/* Desktop: Hover-based dropdown */}
+        <div className="hidden md:block">
+          <Link href="/" className="flex items-center gap-0 text-2xl font-bold hover:opacity-80 transition cursor-pointer">
+            <Image src="/pendly-logo.png" alt="Pendly Logo" width={32} height={32} className="h-8 w-8 object-contain" />
+            <span style={{ color: '#0181fe' }}>endly</span>
           </Link>
-          <Link
-            href="/how-it-works"
-            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+          <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+            <Link
+              href="/"
+              className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+            >
+              🏠 Home
+            </Link>
+            <Link
+              href="/how-it-works"
+              className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+            >
+              🔍 How It Works
+            </Link>
+            <Link
+              href="/about"
+              className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+            >
+              ℹ️ About
+            </Link>
+          </div>
+        </div>
+        
+        {/* Mobile: Click-based dropdown */}
+        <div className="md:hidden" ref={logoDropdownRef}>
+          <button 
+            onClick={() => setShowLogoDropdown(!showLogoDropdown)}
+            className="flex items-center gap-0 text-2xl font-bold transition cursor-pointer"
           >
-            🔍 How It Works
-          </Link>
-          <Link
-            href="/about"
-            className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
-          >
-            ℹ️ About
-          </Link>
+            <Image src="/pendly-logo.png" alt="Pendly Logo" width={32} height={32} className="h-8 w-8 object-contain" />
+            <span style={{ color: '#0181fe' }}>endly</span>
+          </button>
+          {showLogoDropdown && (
+            <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+              <Link
+                href="/"
+                onClick={() => setShowLogoDropdown(false)}
+                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+              >
+                🏠 Home
+              </Link>
+              <Link
+                href="/how-it-works"
+                onClick={() => setShowLogoDropdown(false)}
+                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+              >
+                🔍 How It Works
+              </Link>
+              <Link
+                href="/about"
+                onClick={() => setShowLogoDropdown(false)}
+                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+              >
+                ℹ️ About
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       {/* Desktop Search Bar */}
@@ -121,28 +181,68 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
         )}
         {user && (
           <div className="relative group">
-            <button className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold hover:bg-blue-200 transition">
-              {user.displayName || user.email}
-            </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
-              <Link
-                href="/my-campaigns"
-                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
-              >
-                👤 Profile
-              </Link>
-              <Link
-                href="/settings"
-                className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
-              >
-                ⚙️ Settings
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
-              >
-                🚪 Log Out
+            {/* Desktop: Hover-based dropdown */}
+            <div className="hidden md:block">
+              <button className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold hover:bg-blue-200 transition">
+                {user.displayName || user.email}
               </button>
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+                <Link
+                  href="/my-campaigns"
+                  className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+                >
+                  👤 Profile
+                </Link>
+                <Link
+                  href="/settings"
+                  className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+                >
+                  ⚙️ Settings
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+                >
+                  🚪 Log Out
+                </button>
+              </div>
+            </div>
+            
+            {/* Mobile: Click-based dropdown */}
+            <div className="md:hidden" ref={userDropdownRef}>
+              <button 
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+                className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold transition"
+              >
+                {user.displayName || user.email}
+              </button>
+              {showUserDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+                  <Link
+                    href="/my-campaigns"
+                    onClick={() => setShowUserDropdown(false)}
+                    className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
+                  >
+                    👤 Profile
+                  </Link>
+                  <Link
+                    href="/settings"
+                    onClick={() => setShowUserDropdown(false)}
+                    className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 border-t border-gray-100"
+                  >
+                    ⚙️ Settings
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setShowUserDropdown(false);
+                    }}
+                    className="block w-full text-left px-4 py-3 text-red-700 hover:bg-red-50 transition-colors duration-150 rounded-b-lg border-t border-gray-100"
+                  >
+                    🚪 Log Out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
