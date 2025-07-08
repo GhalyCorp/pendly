@@ -314,7 +314,7 @@ export default function BusinessPost({ business, showActions = true }: BusinessP
             <div className="flex flex-col gap-3 justify-center items-center">
               <div className="flex gap-2">
                 <EditProfileButtonWrapper businessEmail={business.email} businessId={business.id} />
-                <ShareButton profileUrl={`https://yourdomain.com/business/${business.id}`} />
+                <ShareButton profileUrl={`https://pendly.org/business/${business.id}`} />
               </div>
               <Link 
                 href={`/business/${business.id}/donate`}

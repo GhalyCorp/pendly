@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       },
       business_profile: {
         name: businessName,
-        url: process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.com',
+        url: process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.org',
       },
     });
 

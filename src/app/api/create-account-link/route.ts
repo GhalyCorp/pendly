@@ -26,12 +26,12 @@ export async function POST(request: Request) {
     
     if (businessId === 'setup') {
       // This is for new user setup
-      returnUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/setup-stripe?success=true`;
-      refreshUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/setup-stripe?refresh=true`;
+      returnUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.org'}/setup-stripe?success=true`;
+refreshUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.org'}/setup-stripe?refresh=true`;
     } else {
       // This is for existing business edit
-      returnUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/business/${businessId}/edit?success=true`;
-      refreshUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/business/${businessId}/edit?refresh=true`;
+      returnUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.org'}/business/${businessId}/edit?success=true`;
+refreshUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://pendly.org'}/business/${businessId}/edit?refresh=true`;
     }
 
     console.log('Return URL:', returnUrl);
