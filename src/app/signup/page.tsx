@@ -12,6 +12,7 @@ export default function SignupPage() {
   const [businessName, setBusinessName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -73,10 +74,23 @@ export default function SignupPage() {
             className="w-full border border-blue-300 rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500"
             required
           />
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="agree"
+              checked={agreed}
+              onChange={e => setAgreed(e.target.checked)}
+              required
+              className="accent-blue-700 w-4 h-4"
+            />
+            <label htmlFor="agree" className="text-xs text-blue-900 select-none">
+              I agree to the <a href="/terms-of-service" className="text-blue-700 underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy-policy" className="text-blue-700 underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </label>
+          </div>
           {error && <p className="text-red-600 text-center">{error}</p>}
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !agreed}
             className="w-full px-4 py-3 bg-blue-700/90 text-white rounded-lg font-bold hover:bg-blue-800/90 shadow-md transition disabled:opacity-50"
           >
             {loading ? 'Creating Account...' : 'Sign Up'}
