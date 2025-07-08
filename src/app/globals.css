@@ -62,16 +62,10 @@ html {
 
 .homepage-blue-gradient {
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  min-height: 500vh;
-  min-width: 500vw;
-  margin: -200vh -200vw;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
   padding: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
 }
 
 .card-bg {
