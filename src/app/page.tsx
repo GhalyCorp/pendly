@@ -121,7 +121,8 @@ export default function HomePage() {
   return (
     <>
       <NavBar search={search} setSearch={setSearch} />
-      <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
+      <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32 w-full">
+        <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto">
         {/* Large soft red circle accents with floating animation */}
         {/* Circle 1 */}
         <div className="absolute top-[-40px] md:top-[-80px] right-[-60px] md:right-[-120px] w-[160px] h-[160px] md:w-[320px] md:h-[320px] pointer-events-none z-0">
@@ -263,6 +264,7 @@ export default function HomePage() {
             <StartCampaignButton />
           </div>
         </section>
+        </div>
       </main>
     </>
   );
