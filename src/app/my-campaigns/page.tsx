@@ -80,7 +80,7 @@ export default function MyCampaignsPage() {
     return (
       <>
         <NavBar />
-        <main className="min-h-screen flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
+        <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
           <div className="flex justify-center items-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white border-t-transparent"></div>
             <span className="ml-4 text-white font-bold text-xl">Loading campaigns...</span>
@@ -93,7 +93,7 @@ export default function MyCampaignsPage() {
   return (
     <>
       <NavBar />
-      <main className="min-h-screen flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
+      <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
         <section className="flex flex-col items-center mt-10 mb-8 w-full z-10">
           <h2 className="text-5xl font-bold text-red-700 mb-5 text-center">
             {businessName ? `${businessName}'s Campaigns` : 'My Campaigns'}

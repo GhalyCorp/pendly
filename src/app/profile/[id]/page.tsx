@@ -67,7 +67,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
   return (
     <>
       <NavBar />
-      <main className="min-h-screen flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
+      <main className="flex flex-col items-center homepage-blue-gradient pt-14 relative overflow-x-hidden pb-32">
         <section className="flex flex-col items-center mt-10 mb-8 w-full z-10">
           <h2 className="text-5xl font-bold text-red-700 mb-5 text-center">
             {businessName}&apos;s Campaigns
