@@ -121,8 +121,8 @@ export default function HomePage() {
   return (
     <>
       <NavBar search={search} setSearch={setSearch} />
-      <main className="flex flex-col items-center pt-14 relative overflow-x-hidden pb-32 w-full">
-        <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto homepage-blue-gradient relative">
+      <main className="flex flex-col items-center relative overflow-x-hidden pb-32 w-full">
+        <div className="w-full max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw] xl:max-w-[50vw] mx-auto relative">
         {/* Large soft red circle accents with floating animation */}
         {/* Circle 1 */}
         <div className="absolute top-[-20px] md:top-[-40px] right-[-20px] md:right-[-40px] w-[80px] h-[80px] md:w-[160px] md:h-[160px] pointer-events-none z-0">
@@ -146,7 +146,7 @@ export default function HomePage() {
         </div>
 
         {/* Hero Section */}
-        <section className="flex flex-col items-center mt-10 mb-16 w-full z-10 px-4">
+        <section className="flex flex-col items-center mt-24 mb-16 w-full z-10 px-4">
           <div className="text-center max-w-5xl">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Welcome to{' '}

@@ -44,7 +44,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en" className="overflow-x-hidden homepage-blue-gradient">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="icon" type="image/png" sizes="32x32" href="/pendly-logo.png" />
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className="homepage-blue-gradient">
 
         <ErrorBoundary>
         <NavBar />
