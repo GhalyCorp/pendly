@@ -23,7 +23,7 @@ Additional details:
 
 Thank you!`);
     
-    const mailtoLink = `mailto:adamghaly@pendly.org?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:support@pendly.org?subject=${subject}&body=${body}`;
     window.open(mailtoLink, '_blank');
     
     setTimeout(() => setIsClicked(false), 1000);
@@ -46,7 +46,7 @@ Thank you!`);
                 Having trouble with Pendly? We&apos;re here to help! Click to send us an email and we&apos;ll get back to you as soon as possible.
               </p>
               <div className="text-xs text-blue-600 font-medium">
-                📧 adamghaly@pendly.org
+                📧 support@pendly.org
               </div>
             </div>
           </div>

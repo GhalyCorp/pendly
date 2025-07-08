@@ -40,11 +40,20 @@ export default function TermsOfServicePage() {
           <ul className="list-disc ml-6">
             <li>Pendly is not liable for financial loss, server outages, or any damages resulting from use of the platform.</li>
           </ul>
-          <h2 className="font-bold text-lg">7. Modifications</h2>
+          <h2 className="font-bold text-lg">7. User-Generated Content</h2>
+          <ul className="list-disc ml-6">
+            <li>Businesses may upload images, logos, and other media. You retain ownership of your content but grant us license to display it on our platform.</li>
+            <li>You are responsible for ensuring you have rights to any content you upload.</li>
+          </ul>
+          <h2 className="font-bold text-lg">8. Governing Law</h2>
+          <ul className="list-disc ml-6">
+            <li>These terms are governed by the laws of New York, USA.</li>
+          </ul>
+          <h2 className="font-bold text-lg">9. Modifications</h2>
           <ul className="list-disc ml-6">
             <li>We may update these Terms of Service at any time. Continued use of Pendly means you accept the new terms.</li>
           </ul>
-          <h2 className="font-bold text-lg">8. Contact</h2>
+          <h2 className="font-bold text-lg">10. Contact</h2>
           <ul className="list-disc ml-6">
             <li>For legal questions, contact us at <a href="mailto:support@pendly.org" className="text-blue-700 underline">support@pendly.org</a>.</li>
           </ul>

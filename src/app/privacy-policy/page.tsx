@@ -28,6 +28,7 @@ export default function PrivacyPolicyPage() {
           <ul className="list-disc ml-6">
             <li>Data is stored securely using Firebase, Stripe, and other trusted providers.</li>
             <li>We use industry-standard security measures to protect your data.</li>
+            <li>We comply with the NY SHIELD Act and other applicable data security regulations.</li>
           </ul>
           <h2 className="font-bold text-lg">4. Sharing Your Information</h2>
           <ul className="list-disc ml-6">
