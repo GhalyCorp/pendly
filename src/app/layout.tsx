@@ -44,7 +44,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/pendly-logo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/pendly-logo.png" />
