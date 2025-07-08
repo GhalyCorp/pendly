@@ -5,7 +5,7 @@ export default function SearchBarNav({ value, onChangeAction }: { value: string;
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="relative w-96">
+    <div className="relative w-full md:w-96">
       {/* Background glow effect */}
       <div className={`absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-2xl blur-xl transition-all duration-300 ${
         isFocused ? 'opacity-100 scale-110' : 'opacity-0 scale-100'

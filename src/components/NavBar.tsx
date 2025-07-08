@@ -17,6 +17,7 @@ import type { User } from 'firebase/auth';
 
 export default function NavBar({ search, setSearch }: NavBarProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
 
 
   return (
-    <nav className="w-full bg-white flex items-center justify-between px-8 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
+    <nav className="w-full bg-white flex items-center justify-between px-4 md:px-8 py-3 fixed top-0 left-0 z-[999] border-none outline-none">
       <div className="relative group">
         <Link href="/" className="flex items-center gap-0 text-2xl font-bold hover:opacity-80 transition cursor-pointer">
           <Image src="/pendly-logo.png" alt="Pendly Logo" width={32} height={32} className="h-8 w-8 object-contain" />
@@ -66,17 +67,57 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
           </Link>
         </div>
       </div>
+      {/* Desktop Search Bar */}
       {pathname === '/' && search !== undefined && setSearch !== undefined && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
           <SearchBarNav value={search} onChangeAction={setSearch} />
         </div>
       )}
-      <div className="flex items-center gap-4">
+      
+      {/* Mobile Search Button */}
+      {pathname === '/' && search !== undefined && setSearch !== undefined && (
+        <div className="md:hidden">
+          <button
+            onClick={() => setShowMobileSearch(!showMobileSearch)}
+            className="bg-white border-2 border-gray-200 rounded-lg p-2 hover:border-blue-300 transition-colors"
+          >
+            <svg className="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+        </div>
+      )}
+      
+      {/* Mobile Search Dropdown */}
+      {showMobileSearch && pathname === '/' && search !== undefined && setSearch !== undefined && (
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 p-4 md:hidden z-50">
+          <div className="flex items-center gap-2 mb-2">
+            <SearchBarNav value={search} onChangeAction={setSearch} />
+            <button
+              onClick={() => setShowMobileSearch(false)}
+              className="text-gray-500 hover:text-gray-700 p-2"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="flex items-center gap-2 md:gap-4">
         {!user && (
-          <Link href="/signup" className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition">Start a Campaign</Link>
+          <Link href="/signup" className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700 transition">
+            <span className="hidden md:inline">Start a Campaign</span>
+            <span className="md:hidden">Campaign</span>
+          </Link>
         )}
         {!user && (
-          <Link href="/login" className="bg-blue-700 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-800 transition">Log In</Link>
+          <Link href="/login" className="bg-blue-700 text-white px-3 md:px-4 py-2 rounded-lg font-bold hover:bg-blue-800 transition">
+            <span className="hidden md:inline">Log In</span>
+            <span className="md:hidden">Login</span>
+          </Link>
         )}
         {user && (
           <div className="relative group">
