@@ -1,0 +1,21 @@
+{
+  "name": "Pendly",
+  "short_name": "Pendly",
+  "description": "Crowdfunding for local businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/pendly-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pendly-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 
