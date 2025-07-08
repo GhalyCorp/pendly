@@ -122,7 +122,7 @@ export default function HomePage() {
     <>
       <NavBar search={search} setSearch={setSearch} />
       <main className="flex flex-col items-center pt-14 relative overflow-x-hidden pb-32 w-full">
-        <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto homepage-blue-gradient relative">
+        <div className="w-full max-w-[98vw] md:max-w-[95vw] lg:max-w-[92vw] xl:max-w-[90vw] mx-auto homepage-blue-gradient relative">
         {/* Large soft red circle accents with floating animation */}
         {/* Circle 1 */}
         <div className="absolute top-[-20px] md:top-[-40px] right-[-20px] md:right-[-40px] w-[80px] h-[80px] md:w-[160px] md:h-[160px] pointer-events-none z-0">

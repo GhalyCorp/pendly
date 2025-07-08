@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className="homepage-blue-gradient">
 
         <ErrorBoundary>
         <NavBar />
