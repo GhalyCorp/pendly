@@ -186,7 +186,7 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
               <button className="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold hover:bg-blue-200 transition">
                 {user.displayName || user.email}
               </button>
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
+              <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top">
                 <Link
                   href="/my-campaigns"
                   className="block px-4 py-3 text-blue-900 hover:bg-blue-50 transition-colors duration-150 rounded-t-lg"
@@ -217,7 +217,7 @@ export default function NavBar({ search, setSearch }: NavBarProps) {
                 {user.displayName || user.email}
               </button>
               {showUserDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
+                <div className="absolute right-0 mt-2 w-48 max-w-[calc(100vw-2rem)] bg-white border border-gray-200 rounded-lg shadow-xl z-50">
                   <Link
                     href="/my-campaigns"
                     onClick={() => setShowUserDropdown(false)}

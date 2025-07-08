@@ -33,7 +33,7 @@ Thank you!`);
     <div className="fixed bottom-6 right-8 z-50">
       {/* Support Tooltip */}
       {isHovered && (
-        <div className="absolute bottom-16 right-0 mb-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 p-4 transform transition-all duration-300">
+        <div className="absolute bottom-16 right-0 mb-2 w-64 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-xl border border-gray-200 p-4 transform transition-all duration-300">
           <div className="flex items-start space-x-3">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
